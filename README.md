@@ -101,17 +101,6 @@ This repository contains two Django projects, `gs1` and `gs2`, demonstrating dif
     response = requests.post(URL, json=data)
     print(response.json())
     ```
-
-### Known Issues
-
-- **Database Table Not Found**: Ensure migrations are applied and the database schema is correctly set up.
-
-### Contributing
-
-Contributions are welcome! Please open issues or submit pull requests with improvements or fixes.
-
-### License
-
 This project is licensed under the MIT License. See the LICENSE file for details.
 
 ---
