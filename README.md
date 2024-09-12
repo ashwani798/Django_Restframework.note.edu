@@ -97,7 +97,7 @@ This repository contains two Django projects, `gs1` and `gs2`, demonstrating dif
     import requests
 
     URL = 'http://127.0.0.1:8000/stucreate/'
-    data = { name: 'Andrew', roll: 101, city: 'Gonda' }
+    data = { name: 'Andrew', roll: 101, city: 'Hanger' }
     response = requests.post(URL, json=data)
     print(response.json())
     ```
