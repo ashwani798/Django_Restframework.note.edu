@@ -2,7 +2,7 @@
 
 ## Overview
 
-This repository contains two Django projects, `gs1` and `gs2`, demonstrating different aspects of Django Rest Framework (DRF) for API development.
+This repository contains multiple Django projects, each prefixed with gs, that demonstrate various aspects of Django Rest Framework (DRF) for API development. These projects cover a range of functionalities and use cases.
 
 ---
 
@@ -101,8 +101,102 @@ This repository contains two Django projects, `gs1` and `gs2`, demonstrating dif
     response = requests.post(URL, json=data)
     print(response.json())
     ```
-This project is licensed under the MIT License. See the LICENSE file for details.
+## gs3
 
----
+### Overview
 
-Feel free to explore both projects and provide feedback or contributions. Happy coding!
+`gs3` is a Django project that extends the capabilities of API development with Django Rest Framework by providing a unified API endpoint for managing student data. This project includes advanced data handling, error management, and supports CRUD operations (GET, POST, PUT, DELETE) on student records. It also integrates CSRF exemption for testing purposes.
+
+### Current Work
+
+- **Unified API Endpoint**: Developed a single endpoint `/studentapi/` to handle CRUD operations for student records.
+- **Data Handling**: Implemented parsing and rendering of JSON data, with comprehensive error handling for invalid data and non-existent records.
+- **CRUD Operations**: Enabled Create, Read, Update, and Delete operations through the API.
+- **CSRF Exemption**: Disabled CSRF protection to simplify testing and development.
+
+### Setup Instructions
+
+1. **Clone the Repository**
+    ```bash
+    git clone <repository-url>
+    ```
+
+2. **Navigate to the Project Directory**
+    ```bash
+    cd gs3
+    ```
+
+3. **Install Dependencies**
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+4. **Apply Migrations**
+    ```bash
+    python manage.py migrate
+    ```
+
+5. **Run the Development Server**
+    ```bash
+    python manage.py runserver
+    ```
+
+6. **Test the API Endpoint**
+    You can test the API using `myapp1.py` or any HTTP client. Here are examples of how to interact with the API:
+
+    - **GET Request**
+        ```python
+        import requests
+
+        url = 'http://127.0.0.1:8000/studentapi/'
+        response = requests.get(url, params={'id': 1})
+        print('GET Response:', response.json())
+        ```
+
+    - **POST Request**
+        ```python
+        import requests
+        import json
+
+        url = 'http://127.0.0.1:8000/studentapi/'
+        data = {
+            'name': 'Jason',
+            'roll': 4,
+            'city': 'Kota'
+        }
+        response = requests.post(url, data=json.dumps(data), headers={'Content-Type': 'application/json'})
+        print('POST Response:', response.json())
+        ```
+
+    - **PUT Request**
+        ```python
+        import requests
+        import json
+
+        url = 'http://127.0.0.1:8000/studentapi/'
+        data = {
+            'id': 4,
+            'name': 'Trudo',
+            'city': 'Agra'
+        }
+        response = requests.put(url, data=json.dumps(data), headers={'Content-Type': 'application/json'})
+        print('PUT Response:', response.json())
+        ```
+
+    - **DELETE Request**
+        ```python
+        import requests
+        import json
+
+        url = 'http://127.0.0.1:8000/studentapi/'
+        data = {
+            'id': 4
+        }
+        response = requests.delete(url, data=json.dumps(data), headers={'Content-Type': 'application/json'})
+        print('DELETE Response:', response.json())
+        ```
+
+### Known Issues
+
+- **Database Table Not Found**: Ensure migrations are applied and the database schema is correctly set up.
+- **CSRF Exemption**: CSRF protection is disabled for testing purposes; consider enabling it for production environments.
