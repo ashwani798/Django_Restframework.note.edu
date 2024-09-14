@@ -200,3 +200,109 @@ This repository contains multiple Django projects, each prefixed with gs, that d
 
 - **Database Table Not Found**: Ensure migrations are applied and the database schema is correctly set up.
 - **CSRF Exemption**: CSRF protection is disabled for testing purposes; consider enabling it for production environments.
+# gs4
+
+## Overview
+
+`gs4` is a Django-based REST API application designed to manage student data efficiently. Built using Django 5.1.1 and Django Rest Framework 3.15.2, this project demonstrates advanced data handling and validation techniques, including CRUD operations, custom field-level validation, and object-level validation to ensure data integrity.
+
+## Current Work
+
+- **CRUD Operations:** Provides endpoints for creating, retrieving, updating, and deleting student records.
+- **Custom Field-Level Validation:** Ensures that student names start with 'R'.
+- **Object-Level Validation:** Validates that if the student's name is 'Lauren', the city must be 'Faridabad'.
+- **Error Handling:** Includes specific error messages for validation failures.
+
+## Setup Instructions
+
+### Installation
+
+1. Clone the repository:
+
+    ```bash
+    git clone https://github.com/yourusername/gs4.git
+    ```
+
+2. Navigate to the project directory:
+
+    ```bash
+    cd gs4
+    ```
+
+3. Create a virtual environment and activate it:
+
+    ```bash
+    python -m venv env
+    source env/bin/activate  # On Windows use `env\Scripts\activate`
+    ```
+
+4. Install the required packages:
+
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+5. Apply database migrations:
+
+    ```bash
+    python manage.py migrate
+    ```
+
+6. Create a superuser (if needed):
+
+    ```bash
+    python manage.py createsuperuser
+    ```
+
+7. Run the development server:
+
+    ```bash
+    python manage.py runserver
+    ```
+
+## API Endpoints
+
+### GET `/studentapi/`
+
+- **Description:** Retrieve a list of student records or a specific student by ID.
+- **Parameters:**
+  - `id` (optional): ID of the student to retrieve.
+
+### POST `/studentapi/`
+
+- **Description:** Create a new student record.
+- **Payload:**
+  ```json
+
+### PUT `/studentapi/`
+
+- **Description:** Update an existing student record.
+- **Payload:**
+  ```json
+  {
+    "id": 1,
+    "name": "Updated Name",
+    "roll": 456,
+    "city": "Updated City"
+  }
+  
+### DELETE `/studentapi/`
+
+- **Description:** Delete a student record.
+- **Payload:**
+  ```json
+  {
+    "id": 1
+  }
+
+  {
+    "name": "Student Name",
+    "roll": 123,
+    "city": "City Name"
+  }
+
+## Known Issues
+
+- Ensure the `name` field starts with 'R' to pass validation.
+- If the `name` is 'abc', the `city` must be 'xyz' to pass object-level validation.
+- The `roll` field should be less than `xxx`; otherwise, it will raise a 'Seat Full' error.
