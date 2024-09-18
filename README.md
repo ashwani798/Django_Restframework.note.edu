@@ -210,7 +210,7 @@ This repository contains multiple Django projects, each prefixed with gs, that d
 
 - **CRUD Operations:** Provides endpoints for creating, retrieving, updating, and deleting student records.
 - **Custom Field-Level Validation:** Ensures that student names start with 'R'.
-- **Object-Level Validation:** Validates that if the student's name is 'Lauren', the city must be 'Faridabad'.
+- **Object-Level Validation:** Validates that if the student's name is 'Lauren', the city must be 'NY'.
 - **Error Handling:** Includes specific error messages for validation failures.
 
 ## Setup Instructions
@@ -306,3 +306,115 @@ This repository contains multiple Django projects, each prefixed with gs, that d
 - Ensure the `name` field starts with 'R' to pass validation.
 - If the `name` is 'abc', the `city` must be 'xyz' to pass object-level validation.
 - The `roll` field should be less than `xxx`; otherwise, it will raise a 'Seat Full' error.
+
+# gs5
+
+## Overview
+
+The `gs5` project is part of a Django Rest Framework (DRF) series that focuses on using `ModelSerializer` to simplify serialization for Django models. This project is centered around managing student data and performing CRUD (Create, Read, Update, Delete) operations through DRF.
+
+## Current Work
+
+- **ModelSerializer Usage**: Leveraged DRF’s `ModelSerializer` to serialize `Student` model data automatically.
+- **CRUD Operations**: Implemented full CRUD functionality for `Student` data.
+  - `GET` request: Fetch student data (single or list).
+  - `POST` request: Create new student entries.
+  - `PUT` request: Update existing student records.
+  - `DELETE` request: Remove student records.
+- **Error Handling**: Added proper validation and error messaging for common issues, such as non-existing records.
+- **JSON Handling**: Managed data exchange using DRF's built-in `JSONParser` and `JSONRenderer`.
+  
+## Setup Instructions
+
+1. **Clone the Repository**:
+    ```bash
+    git clone https://github.com/yourusername/gs5.git
+    cd gs5
+    ```
+
+2. **Create Virtual Environment**:
+    ```bash
+    python -m venv venv
+    source venv/bin/activate  # For Linux/macOS
+    venv\Scripts\activate  # For Windows
+    ```
+
+3. **Install Dependencies**:
+    Install the required packages from the `requirements.txt` file.
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+4. **Run Migrations**:
+    Set up the database by running migrations.
+    ```bash
+    python manage.py makemigrations
+    python manage.py migrate
+    ```
+
+5. **Create a Superuser** (Optional, for accessing the Django admin panel):
+    ```bash
+    python manage.py createsuperuser
+    ```
+
+6. **Run the Development Server**:
+    ```bash
+    python manage.py runserver
+    ```
+
+## API Endpoints
+
+- **GET** `/studentapi/`: Retrieve a list of all students or a specific student by ID.
+- **POST** `/studentapi/`: Add a new student by sending JSON data.
+- **PUT** `/studentapi/`: Update an existing student by ID.
+- **DELETE** `/studentapi/`: Delete a student by ID.
+
+## Example Requests
+
+1. **GET Request**:
+    ```python
+    import requests
+    url = 'http://127.0.0.1:8000/studentapi/'
+    response = requests.get(url)
+    print(response.json())
+    ```
+
+2. **POST Request**:
+    ```python
+    import requests
+    url = 'http://127.0.0.1:8000/studentapi/'
+    data = {'name': 'John', 'roll': 5, 'city': 'New York'}
+    response = requests.post(url, json=data)
+    print(response.json())
+    ```
+
+3. **PUT Request**:
+    ```python
+    import requests
+    url = 'http://127.0.0.1:8000/studentapi/'
+    data = {'id': 5, 'name': 'John Updated', 'city': 'LA'}
+    response = requests.put(url, json=data)
+    print(response.json())
+    ```
+
+4. **DELETE Request**:
+    ```python
+    import requests
+    url = 'http://127.0.0.1:8000/studentapi/'
+    data = {'id': 5}
+    response = requests.delete(url, json=data)
+    print(response.json())
+    ```
+
+## Key Files
+
+- `models.py`: Defines the `Student` model.
+- `serializers.py`: Contains the `StudentSerializer`, a `ModelSerializer` for automatic field and validation management.
+- `views.py`: Class-based view `StudentAPI` to handle API requests.
+- `urls.py`: Defines the routing for the `studentapi/` endpoint.
+
+## Known Issues
+
+- Ensure the `id` field is correctly passed in `PUT` and `DELETE` requests.
+- CSRF is disabled for ease of testing; for production, enable CSRF protection.
+
